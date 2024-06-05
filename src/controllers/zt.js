@@ -63,7 +63,7 @@ exports.network_list = async function() {
   for (let nwid of nwids) {
     try {
       const response = await got(ZT_ADDR + '/controller/network/'
-                                                              + nwid, options);
+          + nwid, options);
       network = (({name, nwid}) => ({name, nwid}))(response.body);
       networks.push(network);
     } catch(err) {
@@ -78,7 +78,7 @@ const network_detail = async function(nwid) {
 
   try {
     const response = await got(ZT_ADDR + '/controller/network/'
-                                                              + nwid, options);
+        + nwid, options);
     return response.body;
   } catch(err) {
     throw(err);
@@ -95,7 +95,7 @@ exports.network_create = async function(name) {
 
   try {
     const response = await got(ZT_ADDR + '/controller/network/'
-                                              + zt_address + '______', options);
+        + zt_address + '______', options);
     return response.body;
   } catch(err) {
     throw(err);
@@ -108,7 +108,7 @@ exports.network_delete = async function(nwid) {
 
   try {
     const response = await got(ZT_ADDR + '/controller/network/'
-                                                              + nwid, options);
+        + nwid, options);
     response.body.deleted = true;
     return response.body;
   } catch(err) {
@@ -127,8 +127,8 @@ exports.ipAssignmentPools = async function(nwid, ipAssignmentPool, action) {
     ipAssignmentPools.push(ipAssignmentPool);
   } else if (action === 'delete') {
     const pool = ipAssignmentPools.find(pool =>
-      pool.ipRangeStart === ipAssignmentPool.ipRangeStart &&
-      pool.ipRangeEnd === ipAssignmentPool.ipRangeEnd);
+        pool.ipRangeStart === ipAssignmentPool.ipRangeStart &&
+        pool.ipRangeEnd === ipAssignmentPool.ipRangeEnd);
     ipAssignmentPools = ipAssignmentPools.filter(p => p != pool);
   }
 
@@ -137,7 +137,7 @@ exports.ipAssignmentPools = async function(nwid, ipAssignmentPool, action) {
 
   try {
     const response = await got(ZT_ADDR + '/controller/network/'
-                                                              + nwid, options);
+        + nwid, options);
     return response.body;
   } catch(err) {
     throw(err);
@@ -154,7 +154,7 @@ exports.ipAssignmentDelete = async function(nwid, id, ipAssignmentIndex) {
     ipAssignments.splice(ipAssignmentIndex, 1);
     options.body = { ipAssignments: ipAssignments };
     const response = await got(ZT_ADDR + '/controller/network/'
-                                            + nwid + '/member/' + id, options);
+        + nwid + '/member/' + id, options);
     response.body.deleted = true;
     return response.body;
   } catch(err) {
@@ -172,7 +172,7 @@ exports.ipAssignmentAdd = async function(nwid, id, ipAssignment) {
     ipAssignments.push(ipAssignment.ipAddress);
     options.body = { ipAssignments: ipAssignments };
     const response = await got(ZT_ADDR + '/controller/network/'
-                                            + nwid + '/member/' + id, options);
+        + nwid + '/member/' + id, options);
     response.body.added = true;
     return response.body;
   } catch(err) {
@@ -209,7 +209,7 @@ exports.routes = async function(nwid, route, action) {
 
   try {
     const response = await got(ZT_ADDR + '/controller/network/'
-                                                              + nwid, options);
+        + nwid, options);
     return response.body;
   } catch(err) {
     throw(err);
@@ -232,7 +232,7 @@ exports.network_object = async function(nwid, object) {
 
   try {
     const response = await got(ZT_ADDR + '/controller/network/'
-                                                              + nwid, options);
+        + nwid, options);
     return response.body;
   } catch(err) {
     throw(err);
@@ -244,7 +244,7 @@ exports.members = async function(nwid) {
 
   try {
     const response = await got(ZT_ADDR + '/controller/network/'
-                                                  + nwid + '/member', options);
+        + nwid + '/member', options);
     return response.body;
   } catch(err) {
     throw(err);
@@ -256,7 +256,7 @@ const member_detail = async function(nwid, id) {
 
   try {
     const response = await got(ZT_ADDR + '/controller/network/'
-                                            + nwid + '/member/' + id, options);
+        + nwid + '/member/' + id, options);
     return response.body;
   } catch(err) {
     throw(err);
@@ -271,7 +271,7 @@ exports.member_object = async function(nwid, id, object) {
 
   try {
     const response = await got(ZT_ADDR + '/controller/network/'
-                                            + nwid + '/member/' + id, options);
+        + nwid + '/member/' + id, options);
     return response.body;
   } catch(err) {
     throw(err);
@@ -284,7 +284,7 @@ exports.member_delete = async function(nwid, id) {
 
   try {
     const response = await got(ZT_ADDR + '/controller/network/'
-                                            + nwid + '/member/' + id, options);
+        + nwid + '/member/' + id, options);
     response.body.deleted = true;
     return response.body;
   } catch(err) {
@@ -299,15 +299,15 @@ exports.network_easy_setup = async function(nwid,
   const options = await init_options();
   options.method = 'POST';
   options.body =
-    {
-      ipAssignmentPools: ipAssignmentPools,
-      routes: routes,
-      v4AssignMode: v4AssignMode
-    };
+      {
+        ipAssignmentPools: ipAssignmentPools,
+        routes: routes,
+        v4AssignMode: v4AssignMode
+      };
 
   try {
     const response = await got(ZT_ADDR + '/controller/network/'
-                                                              + nwid, options);
+        + nwid, options);
     return response.body;
   } catch(err) {
     throw(err);
